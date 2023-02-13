@@ -1,0 +1,41 @@
+import sys
+
+#set hitungan = 0
+current_word = None
+current_count = 0
+word = None
+
+#mapper
+
+for line in sys.stdin :
+    
+    line = line.strip() #menghilangkan longkap
+
+    words = line.split() #memetakan kata dan mengembalikan dalam bentuk urutan
+    
+    for word in words :
+        #menuliskan list di terminal
+        print ('%s\t%s'%(word,1))
+    
+
+#reducer
+
+    word, count = line.split ('\t',1)
+
+    try :
+        count = int (count)
+    except ValueError:
+        continue
+
+    if current_word == word :
+        current_count += count
+    else :
+        if current_word : 
+            print ('%s\t%s'%(current_word,current_count))
+            current_count = count
+            current_word = word
+        else :            
+            current_count = count
+            current_word = word
+if current_word = word :
+    print ('%s\t%s'%(current_word,current_count))
